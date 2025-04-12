@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2002-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -139,7 +139,7 @@ public class Constants {
 	 */
 	public Object asObject(String code) throws ConstantException {
 		Assert.notNull(code, "Code must not be null");
-		String codeToUse = code.toUpperCase(Locale.ENGLISH);
+		String codeToUse = code.toUpperCase(Locale.ROOT);
 		Object val = this.fieldCache.get(codeToUse);
 		if (val == null) {
 			throw new ConstantException(this.className, codeToUse, "not found");
@@ -159,7 +159,7 @@ public class Constants {
 	 * @return the set of constant names
 	 */
 	public Set<String> getNames(@Nullable String namePrefix) {
-		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ROOT) : "");
 		Set<String> names = new HashSet<>();
 		for (String code : this.fieldCache.keySet()) {
 			if (code.startsWith(prefixToUse)) {
@@ -191,7 +191,7 @@ public class Constants {
 	 * @return the set of constant names
 	 */
 	public Set<String> getNamesForSuffix(@Nullable String nameSuffix) {
-		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ROOT) : "");
 		Set<String> names = new HashSet<>();
 		for (String code : this.fieldCache.keySet()) {
 			if (code.endsWith(suffixToUse)) {
@@ -213,7 +213,7 @@ public class Constants {
 	 * @return the set of values
 	 */
 	public Set<Object> getValues(@Nullable String namePrefix) {
-		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ROOT) : "");
 		Set<Object> values = new HashSet<>();
 		this.fieldCache.forEach((code, value) -> {
 			if (code.startsWith(prefixToUse)) {
@@ -245,7 +245,7 @@ public class Constants {
 	 * @return the set of values
 	 */
 	public Set<Object> getValuesForSuffix(@Nullable String nameSuffix) {
-		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ROOT) : "");
 		Set<Object> values = new HashSet<>();
 		this.fieldCache.forEach((code, value) -> {
 			if (code.endsWith(suffixToUse)) {
@@ -265,7 +265,7 @@ public class Constants {
 	 * @throws ConstantException if the value wasn't found
 	 */
 	public String toCode(Object value, @Nullable String namePrefix) throws ConstantException {
-		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String prefixToUse = (namePrefix != null ? namePrefix.trim().toUpperCase(Locale.ROOT) : "");
 		for (Map.Entry<String, Object> entry : this.fieldCache.entrySet()) {
 			if (entry.getKey().startsWith(prefixToUse) && entry.getValue().equals(value)) {
 				return entry.getKey();
@@ -296,7 +296,7 @@ public class Constants {
 	 * @throws ConstantException if the value wasn't found
 	 */
 	public String toCodeForSuffix(Object value, @Nullable String nameSuffix) throws ConstantException {
-		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ENGLISH) : "");
+		String suffixToUse = (nameSuffix != null ? nameSuffix.trim().toUpperCase(Locale.ROOT) : "");
 		for (Map.Entry<String, Object> entry : this.fieldCache.entrySet()) {
 			if (entry.getKey().endsWith(suffixToUse) && entry.getValue().equals(value)) {
 				return entry.getKey();

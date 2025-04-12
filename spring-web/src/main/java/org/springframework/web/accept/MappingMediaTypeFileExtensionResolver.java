@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2020 the original author or authors.
+ * Copyright 2002-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class MappingMediaTypeFileExtensionResolver implements MediaTypeFileExten
 		if (mediaTypes != null) {
 			Set<String> allFileExtensions = new HashSet<>(mediaTypes.size());
 			mediaTypes.forEach((extension, mediaType) -> {
-				String lowerCaseExtension = extension.toLowerCase(Locale.ENGLISH);
+				String lowerCaseExtension = extension.toLowerCase(Locale.ROOT);
 				this.mediaTypes.put(lowerCaseExtension, mediaType);
 				addFileExtension(mediaType, lowerCaseExtension);
 				allFileExtensions.add(lowerCaseExtension);
@@ -109,7 +109,7 @@ public class MappingMediaTypeFileExtensionResolver implements MediaTypeFileExten
 	 */
 	@Nullable
 	protected MediaType lookupMediaType(String extension) {
-		return this.mediaTypes.get(extension.toLowerCase(Locale.ENGLISH));
+		return this.mediaTypes.get(extension.toLowerCase(Locale.ROOT));
 	}
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2002-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -233,7 +234,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 			return tableName.toUpperCase();
 		}
 		else if (isStoresLowerCaseIdentifiers()) {
-			return tableName.toLowerCase();
+			return tableName.toLowerCase(Locale.ROOT);
 		}
 		else {
 			return tableName;
@@ -250,7 +251,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 			return catalogName.toUpperCase();
 		}
 		else if (isStoresLowerCaseIdentifiers()) {
-			return catalogName.toLowerCase();
+			return catalogName.toLowerCase(Locale.ROOT);
 		}
 		else {
 			return catalogName;
@@ -267,7 +268,7 @@ public class GenericTableMetaDataProvider implements TableMetaDataProvider {
 			return schemaName.toUpperCase();
 		}
 		else if (isStoresLowerCaseIdentifiers()) {
-			return schemaName.toLowerCase();
+			return schemaName.toLowerCase(Locale.ROOT);
 		}
 		else {
 			return schemaName;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2002-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package org.springframework.test.context.junit.jupiter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -49,7 +50,7 @@ import org.springframework.util.StringUtils;
  *
  * <ul>
  * <li>Spring Expression Language (SpEL) expression &mdash; for example:
- * <pre style="code">#{systemProperties['os.name'].toLowerCase().contains('mac')}</pre>
+ * <pre style="code">#{systemProperties['os.name'].toLowerCase(Locale.ROOT).contains('mac')}</pre>
  * <li>Placeholder for a property available in the Spring
  * {@link org.springframework.core.env.Environment Environment} &mdash; for example:
  * <pre style="code">${smoke.tests.enabled}</pre>
@@ -193,7 +194,7 @@ abstract class AbstractExpressionEvaluatingCondition implements ExecutionConditi
 			return (Boolean) result;
 		}
 		else if (result instanceof String) {
-			String str = ((String) result).trim().toLowerCase();
+			String str = ((String) result).trim().toLowerCase(Locale.ROOT);
 			if ("true".equals(str)) {
 				return true;
 			}

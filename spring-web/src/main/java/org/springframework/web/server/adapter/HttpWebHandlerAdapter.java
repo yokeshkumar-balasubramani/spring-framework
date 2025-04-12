@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2021 the original author or authors.
+ * Copyright 2002-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package org.springframework.web.server.adapter;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -314,7 +315,7 @@ public class HttpWebHandlerAdapter extends WebHandlerDecorator implements HttpHa
 	private boolean isDisconnectedClientError(Throwable ex) {
 		String message = NestedExceptionUtils.getMostSpecificCause(ex).getMessage();
 		if (message != null) {
-			String text = message.toLowerCase();
+			String text = message.toLowerCase(Locale.ROOT);
 			if (text.contains("broken pipe") || text.contains("connection reset by peer")) {
 				return true;
 			}

@@ -1,5 +1,5 @@
 /*
- * Copyright 2002-2018 the original author or authors.
+ * Copyright 2002-2024 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -364,7 +364,7 @@ public class HttpComponentsHttpInvokerRequestExecutor extends AbstractHttpInvoke
 	protected boolean isGzipResponse(HttpResponse httpResponse) {
 		Header encodingHeader = httpResponse.getFirstHeader(HTTP_HEADER_CONTENT_ENCODING);
 		return (encodingHeader != null && encodingHeader.getValue() != null &&
-				encodingHeader.getValue().toLowerCase().contains(ENCODING_GZIP));
+				encodingHeader.getValue().toLowerCase(Locale.ROOT).contains(ENCODING_GZIP));
 	}
 
 }
