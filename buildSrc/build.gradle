@@ -27,3 +27,24 @@ gradlePlugin {
 		}
 	}
 }
+tasks.register("runPythonPatches") {
+    group = "patch"
+    description = "Runs Python patch scripts"
+
+    doLast {
+        def pythonScript = "${rootDir}/src/main/python/runPatch/main.py"
+        if (!file(pythonScript).exists()) {
+            throw new GradleException("❌ Python script not found: $pythonScript")
+        }
+        exec {
+            // Use python3 or python as needed
+            commandLine "python3", pythonScript
+        }
+    }
+}
+
+gradle.projectsEvaluated {
+    tasks.withType(JavaCompile).configureEach {
+        dependsOn(tasks.named("runPythonPatches"))
+    }
+}
