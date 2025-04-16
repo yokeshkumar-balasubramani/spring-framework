@@ -2322,4 +2322,24 @@ class DataBinderTests {
 		}
 	}
 
+	@Test
+	void setDisallowedFields_CVE_2024_38820() throws BindException
+	{
+		// switching the default locale causes this test to break before the fix
+		Locale.setDefault(Locale.forLanguageTag("tr-TR"));
+		TestBean rod = new TestBean();
+		DataBinder binder = new DataBinder(rod);
+		binder.setDisallowedFields("JEDI");
+
+		MutablePropertyValues pvs = new MutablePropertyValues();
+		pvs.add("name", "Rod");
+		pvs.add("jedi", "true");
+
+		binder.bind(pvs);
+		binder.close();
+
+		assertThat(rod.getName()).as("changed name correctly").isEqualTo("Rod");
+		assertThat(binder.getBindingResult().getSuppressedFields()).containsExactlyInAnyOrder("jedi");
+	}
+
 }
